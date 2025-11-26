@@ -99,6 +99,11 @@ int main(void)
 
 	uint8_t bmp_id = 0;
 
+	bmp_get_id(&bmp_id);
+
+	printf("DEVICE ID : 0x%x \r\n", bmp_id);
+	bmp_configure();
+
 
 	/* USER CODE END 2 */
 
@@ -106,11 +111,6 @@ int main(void)
 	/* USER CODE BEGIN WHILE */
 	while (1)
 	{
-
-		bmp_get_id(&bmp_id);
-
-		 printf("DEVICE ID : 0x%x \r\n", bmp_id);
-		 HAL_Delay(500);
 		/* USER CODE END WHILE */
 
 		/* USER CODE BEGIN 3 */

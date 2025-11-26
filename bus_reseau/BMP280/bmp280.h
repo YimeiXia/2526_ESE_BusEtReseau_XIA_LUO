@@ -10,6 +10,7 @@
 
 
 void bmp_get_id(uint8_t *id);
+void bmp_configure();
 
 
 
