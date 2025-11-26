@@ -26,6 +26,8 @@
 /* USER CODE BEGIN Includes */
 #include <stdio.h>
 
+#include "bmp280.h"
+
 /* USER CODE END Includes */
 
 /* Private typedef -----------------------------------------------------------*/
@@ -95,12 +97,20 @@ int main(void)
 
 	printf("\r\n====== TP BUS ET RESEAUX ======\r\n");
 
+	uint8_t bmp_id = 0;
+
+
 	/* USER CODE END 2 */
 
 	/* Infinite loop */
 	/* USER CODE BEGIN WHILE */
 	while (1)
 	{
+
+		bmp_get_id(&bmp_id);
+
+		 printf("DEVICE ID : 0x%x \r\n", bmp_id);
+		 HAL_Delay(500);
 		/* USER CODE END WHILE */
 
 		/* USER CODE BEGIN 3 */
