@@ -76,3 +76,9 @@
        return p;
    } 
    ```
+
+### 2.3. Communication I²C
+
+- Identification du BMP280
+
+<img src="images/image1.png" alt="trame id oscillo" width="600"/>
