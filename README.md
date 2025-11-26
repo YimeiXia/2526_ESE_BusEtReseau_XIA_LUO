@@ -5,11 +5,12 @@
 ### 2.1. Capteur BMP280
 
 1. Addresse I2C du composant : 111011x (x dépend de SDO)
-   - en écriture : 111011x1
-   - en lecture : 111011x0
-2. Pour identifier le composant : registre 'id', 0xd0
-3. Pour place le composant en mode normal : registre 'ctrl_meas', 0xf4 (bit 1, 0)
-4. Registres contenant l'étalonnage (trimming) du composant :
+   - **dans notre cas : 0b1110111, 0x77**
+   - en écriture : 11101111
+   - en lecture : 11101110
+3. Pour identifier le composant : registre 'id', 0xd0
+4. Pour place le composant en mode normal : registre 'ctrl_meas', 0xf4 (bit 1, 0)
+5. Registres contenant l'étalonnage (trimming) du composant :
    - dig_T1 : 0x88/0x90 (registre LSB/MSB)
    - dig_T2 : 0x81/0x8B
    - dig_T3 : 0x8C/0x8D
@@ -23,16 +24,16 @@
    - dig_P8 : 0x0C/0x9D
    - dig_P9 : 0x9E/0x9F
    - réservé 0xA0/0xA1
-5. Registres contenant la température du composant :
+6. Registres contenant la température du composant :
    - 'temp_msb' : 0xfa
    - 'temp_lsb' : 0xfb
    - 'temp_xlsb' : Oxfc (bit 7, 6, 5, 4)
-6. Registres contenant la pression :
+7. Registres contenant la pression :
    - 'press_msb' : 0xf7
    - 'press_lsb' : 0xf8
    - 'press_xlsb' : Oxf9 (bit 7, 6, 5, 4)
 
-7. ```
+8. ```
    // Returns temperature in DegC, resolution is 0.01 DegC. Output value of “5123” equals 51.23 DegC.
    // t_fine carries fine temperature as global value
    BMP280_S32_t t_fine;
