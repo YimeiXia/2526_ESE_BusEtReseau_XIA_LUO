@@ -118,6 +118,11 @@ int main(void)
 
 	printf("Raw pressure : %d \r\n", raw_press);
 
+	uint32_t comp_temp = bmp280_compensate_T_int32(raw_temp, &compensation_params);
+	printf("Compensated temperature : %d (0.01 °C), %.2f °C \r\n", comp_temp, comp_temp / 100.0f);
+	uint32_t comp_press = bmp280_compensate_P_int32(raw_press, &compensation_params);
+	printf("Compensated pressure : %d Pa \r\n", comp_press);
+
 
 	/* USER CODE END 2 */
 
