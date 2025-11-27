@@ -105,6 +105,20 @@ int main(void)
 	bmp_configure();
 
 
+	bmp280_comp_param_t compensation_params;
+	bmp_get_trimming_params(&compensation_params);
+
+	uint32_t raw_temp;
+	get_bmp280_raw_temp(&raw_temp);
+
+	printf("Raw temperature : %d \r\n", raw_temp);
+
+	uint32_t raw_press;
+	get_bmp280_raw_press(&raw_press);
+
+	printf("Raw pressure : %d \r\n", raw_press);
+
+
 	/* USER CODE END 2 */
 
 	/* Infinite loop */
