@@ -27,6 +27,7 @@
 #include <stdio.h>
 
 #include "bmp280.h"
+#include "mpu9250.h"
 
 /* USER CODE END Includes */
 
@@ -98,12 +99,10 @@ int main(void)
 	printf("\r\n====== TP BUS ET RESEAUX ======\r\n");
 
 	uint8_t bmp_id = 0;
-
 	bmp_get_id(&bmp_id);
+	printf("BMP DEVICE ID : 0x%x \r\n", bmp_id);
 
-	printf("DEVICE ID : 0x%x \r\n", bmp_id);
 	bmp_configure();
-
 
 	bmp280_comp_param_t compensation_params;
 	bmp_get_trimming_params(&compensation_params);
@@ -122,6 +121,18 @@ int main(void)
 	printf("Compensated temperature : %d (0.01 °C), %.2f °C \r\n", comp_temp, comp_temp / 100.0f);
 	uint32_t comp_press = bmp280_compensate_P_int32(raw_press, &compensation_params);
 	printf("Compensated pressure : %d Pa \r\n", comp_press);
+
+
+	uint8_t mpu_id = 0;
+	mpu_get_id(&mpu_id);
+	printf("MPU DEVICE ID : 0x%x \r\n", mpu_id);
+
+	mpu_configure();
+
+	mpu9250_accel_data_t accel_data;
+	mpu_get_accel_data(&accel_data);
+	mpu_disp_accel_data(&accel_data);
+
 
 
 	/* USER CODE END 2 */
