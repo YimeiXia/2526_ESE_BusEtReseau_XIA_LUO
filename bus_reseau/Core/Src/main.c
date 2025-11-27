@@ -25,6 +25,7 @@
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
 #include <stdio.h>
+#include <string.h>
 
 #include "bmp280.h"
 #include "mpu9250.h"
@@ -94,6 +95,7 @@ int main(void)
 	MX_GPIO_Init();
 	MX_USART2_UART_Init();
 	MX_I2C1_Init();
+	MX_USART1_UART_Init();
 	/* USER CODE BEGIN 2 */
 
 	printf("\r\n====== TP BUS ET RESEAUX ======\r\n");
@@ -134,6 +136,9 @@ int main(void)
 	mpu_disp_accel_data(&accel_data);
 
 
+	uint8_t rxData[5];
+	char txData[10];
+	float K_value = 12.34;
 
 	/* USER CODE END 2 */
 
@@ -141,6 +146,58 @@ int main(void)
 	/* USER CODE BEGIN WHILE */
 	while (1)
 	{
+
+		memset(txData, 0, sizeof(txData));
+		//		HAL_UART_Receive(&huart1, rData, 1, HAL_MAX_DELAY);
+		//		printf("Received: %c\r\n", rData[0]);
+
+		HAL_UART_Receive(&huart1, rxData, 5, HAL_MAX_DELAY);
+		printf("Received: %c%c%c%c\r\n", rxData[0], rxData[1], rxData[2], rxData[3]);
+
+		if (rxData[0] == 'G' && rxData[1] == 'E' && rxData[2] == 'T' && rxData[3] == '_')
+		{
+			switch(rxData[4])
+			{
+			case 'T':
+			{
+				get_bmp280_raw_temp(&raw_temp);
+				comp_temp = bmp280_compensate_T_int32(raw_temp, &compensation_params);
+				sprintf(txData, "T=%05lxH", comp_temp);
+
+				HAL_UART_Transmit(&huart1, (uint8_t*)txData, strlen(txData), HAL_MAX_DELAY);
+				break;
+			}
+			case 'P':
+			{
+				get_bmp280_raw_press(&raw_press);
+				comp_press = bmp280_compensate_P_int32(raw_press, &compensation_params);
+				sprintf(txData, "P=%06lxH", comp_press);
+
+				HAL_UART_Transmit(&huart1, (uint8_t*)txData, strlen(txData), HAL_MAX_DELAY);
+				break;
+			}
+			case 'K':
+			{
+
+				printf("GET_K\r\n");
+				break;
+			}
+			case 'A':
+			{
+				printf("GET_A\r\n");
+				break;
+			}
+			default:
+				printf("Unknown GET command\r\n");
+				break;
+			}
+
+		}
+		if (rxData[0] == 'S' && rxData[1] == 'E' && rxData[2] == 'T' && rxData[3] == '_')
+			printf("Received a SET command\r\n");
+
+
+
 		/* USER CODE END WHILE */
 
 		/* USER CODE BEGIN 3 */
