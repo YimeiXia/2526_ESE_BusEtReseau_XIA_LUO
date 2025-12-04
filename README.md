@@ -99,3 +99,15 @@ Connection: close
 
 Hello, World!
 ```
+
+<img src="images/capture.png" width="600"/>
+
+### 4.2. Première page REST
+
+- **`@approute`**, sert à lier une URL à une fonction python
+  <img src="images/capture2.png" width="600"/>
+
+- **`<int:index>`**, sert à capturer une partie de l'URL et la passer en argument de la fonction
+  <img src="images/capture3.png" width="600"/>
+
+
