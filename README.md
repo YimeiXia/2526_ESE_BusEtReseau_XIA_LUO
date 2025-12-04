@@ -41,7 +41,8 @@
    {
        BMP280_S32_t var1, var2, T;
        var1  = ((((adc_T>>3) – ((BMP280_S32_t)dig_T1<<1))) * ((BMP280_S32_t)dig_T2)) >> 11;
-       var2  = (((((adc_T>>4) – ((BMP280_S32_t)dig_T1)) * ((adc_T>>4) – ((BMP280_S32_t)dig_T1))) >> 12) *        ((BMP280_S32_t)dig_T3)) >> 14;    t_fine = var1 + var2;
+       var2  = (((((adc_T>>4) – ((BMP280_S32_t)dig_T1)) * ((adc_T>>4) – ((BMP280_S32_t)dig_T1))) >> 12) * ((BMP280_S32_t)dig_T3)) >> 14;
+       t_fine = var1 + var2;
        T  = (t_fine * 5 + 128) >> 8;
        return T;
    }
@@ -82,3 +83,19 @@
 - Identification du BMP280
 
 <img src="images/image1.png" alt="trame id oscillo" width="600"/>
+
+## TP3 - Interface REST
+
+### 4.1. Installation du serveur Python
+
+```
+xia@pi-xia:~ $ curl -s -D - http://127.0.0.1:5000
+HTTP/1.1 200 OK
+Server: Werkzeug/3.1.4 Python/3.13.5
+Date: Thu, 04 Dec 2025 09:41:53 GMT
+Content-Type: text/html; charset=utf-8
+Content-Length: 14
+Connection: close
+
+Hello, World!
+```
