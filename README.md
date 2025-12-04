@@ -112,8 +112,13 @@ Hello, World!
 
   <img src="images/capture3.png" width="300"/>
 
-### 4.3. Nouvelles métodes HTTP
-
 <img src="images/capture4.png" width="600"/> <img src="images/capture5.png" width="300"/>
 
+### 4.3. Nouvelles métodes HTTP
 
+```
+xia@pi-xia:~/server $ curl -X POST "http://192.168.4.207:5000/api/request/?name=Kelly&age=22" \
+     -H "Content-Type: application/json" \
+     -d '{"city":"Paris"}'
+{"POST":{"data":{"city":"Paris"}},"args":{"age":"22","name":"Kelly"},"headers":{"Accept":"*/*","Content-Length":"16","Content-Type":"application/json","Host":"192.168.4.207:5000","User-Agent":"curl/8.14.1"},"method":"POST","path":null,"url":"http://192.168.4.207:5000/api/request/?name=Kelly&age=22"}
+```
