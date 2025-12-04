@@ -8,6 +8,9 @@
 #ifndef BMP280_H_
 #define BMP280_H_
 
+#include <stdint.h>
+
+
 #define BMP280_S32_t int32_t
 #define BMP280_U32_t uint32_t
 

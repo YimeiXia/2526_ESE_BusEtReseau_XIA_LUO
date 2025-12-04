@@ -68,10 +68,10 @@ void bmp_get_trimming_params(bmp280_comp_param_t *params)
 	HAL_I2C_Master_Transmit(&hi2c1, BMP_DEV_ADDRESS, &tData, 1, HAL_MAX_DELAY);
 	HAL_I2C_Master_Receive(&hi2c1, BMP_DEV_ADDRESS, rData, BMP_REG_TRIM_LENGTH, HAL_MAX_DELAY);
 
-	for (int i = 0; i < 24; i++)
-	{
-		printf("Trim param %d : %x \r\n", i, rData[i]);
-	}
+//	for (int i = 0; i < 24; i++)
+//	{
+//		printf("Trim param %d : %x \r\n", i, rData[i]);
+//	}
 
 	params->dig_T1 = (uint16_t)(rData[1] << 8) | rData[0];
 	params->dig_T2 = (int16_t)(rData[3] << 8) | rData[2];
