@@ -112,4 +112,8 @@ Hello, World!
 
   <img src="images/capture3.png" width="300"/>
 
+### 4.3. Nouvelles métodes HTTP
+
+<img src="images/capture4.png" width="600"/> <img src="images/capture5.png" width="300"/>
+
 
