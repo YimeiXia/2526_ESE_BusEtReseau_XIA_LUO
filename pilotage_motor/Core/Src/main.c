@@ -132,7 +132,7 @@ int main(void)
   /* USER CODE BEGIN WHILE */
   while (1)
   {
-	  data[0] = 0x54;
+	  data[0] = 0x5A;
 	  data[1] = 0x01;
 	  if (HAL_CAN_AddTxMessage(&hcan1, &txHeader, data, &txMailbox) != HAL_OK)
 	  {
@@ -140,7 +140,7 @@ int main(void)
 	  }
 	  HAL_Delay(1000);
 
-	  data[0] = 0x54;
+	  data[0] = 0x5A;
 	  data[1] = 0x00;
 	  if (HAL_CAN_AddTxMessage(&hcan1, &txHeader, data, &txMailbox) != HAL_OK)
 	  {
