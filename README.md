@@ -41,7 +41,8 @@
    {
        BMP280_S32_t var1, var2, T;
        var1  = ((((adc_T>>3) – ((BMP280_S32_t)dig_T1<<1))) * ((BMP280_S32_t)dig_T2)) >> 11;
-       var2  = (((((adc_T>>4) – ((BMP280_S32_t)dig_T1)) * ((adc_T>>4) – ((BMP280_S32_t)dig_T1))) >> 12) *        ((BMP280_S32_t)dig_T3)) >> 14;    t_fine = var1 + var2;
+       var2  = (((((adc_T>>4) – ((BMP280_S32_t)dig_T1)) * ((adc_T>>4) – ((BMP280_S32_t)dig_T1))) >> 12) * ((BMP280_S32_t)dig_T3)) >> 14;
+       t_fine = var1 + var2;
        T  = (t_fine * 5 + 128) >> 8;
        return T;
    }
@@ -82,3 +83,42 @@
 - Identification du BMP280
 
 <img src="images/image1.png" alt="trame id oscillo" width="600"/>
+
+## TP3 - Interface REST
+
+### 4.1. Installation du serveur Python
+
+```
+xia@pi-xia:~ $ curl -s -D - http://127.0.0.1:5000
+HTTP/1.1 200 OK
+Server: Werkzeug/3.1.4 Python/3.13.5
+Date: Thu, 04 Dec 2025 09:41:53 GMT
+Content-Type: text/html; charset=utf-8
+Content-Length: 14
+Connection: close
+
+Hello, World!
+```
+
+<img src="images/capture.png" width="300"/>
+
+### 4.2. Première page REST
+
+- **`@approute`**, sert à lier une URL à une fonction python
+
+  <img src="images/capture2.png" width="300"/>
+
+- **`<int:index>`**, sert à capturer une partie de l'URL et la passer en argument de la fonction
+
+  <img src="images/capture3.png" width="300"/>
+
+<img src="images/capture4.png" width="600"/> <img src="images/capture5.png" width="300"/>
+
+### 4.3. Nouvelles métodes HTTP
+
+```
+xia@pi-xia:~/server $ curl -X POST "http://192.168.4.207:5000/api/request/?name=Kelly&age=22" \
+     -H "Content-Type: application/json" \
+     -d '{"city":"Paris"}'
+{"POST":{"data":{"city":"Paris"}},"args":{"age":"22","name":"Kelly"},"headers":{"Accept":"*/*","Content-Length":"16","Content-Type":"application/json","Host":"192.168.4.207:5000","User-Agent":"curl/8.14.1"},"method":"POST","path":null,"url":"http://192.168.4.207:5000/api/request/?name=Kelly&age=22"}
+```
