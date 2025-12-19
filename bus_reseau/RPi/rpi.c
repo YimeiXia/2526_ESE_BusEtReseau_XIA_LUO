@@ -16,7 +16,7 @@
 extern uint8_t rxData[6];
 extern char txData[10];
 extern float K_value;
-extern float angle_value;
+extern uint8_t angle_value;
 
 
 bmp280_comp_param_t compensation_params;
@@ -72,7 +72,7 @@ void rpi_traitement_requete()
 		}
 		case 'A':
 		{
-			size = sprintf(txData, "A=%2.5f", angle_value);
+			size = sprintf(txData, "A=%d", (unsigned int)angle_value);
 			HAL_UART_Transmit(&huart1, (uint8_t*)txData, size, HAL_MAX_DELAY);
 			break;
 		}

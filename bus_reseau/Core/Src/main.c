@@ -60,7 +60,7 @@
 uint8_t rxData[6];
 char txData[10];
 float K_value = 12.34;
-float angle_value = 125.7;
+uint8_t angle_value = 0;
 
 /* USER CODE END PV */
 
@@ -77,7 +77,9 @@ void HAL_UART_RxCpltCallback(UART_HandleTypeDef *huart)
 {
 	if (huart->Instance == USART1)
 	{
+//		HAL_GPIO_TogglePin(GPIOA, GPIO_PIN_5);
 		rpi_traitement_requete();
+
 	}
 }
 
@@ -159,8 +161,10 @@ int main(void)
 
 	motor_init();
 
-	uint8_t direction, angle;
+	uint8_t direction;
 	float temp_deg;
+
+
 
 
 	/* USER CODE END 2 */
@@ -178,9 +182,9 @@ int main(void)
 		else
 			direction = 0x01;
 
-		angle = K_value*fabs((float)temp_deg - TEMP_MOYENNE);
-		printf("temperature : %.2f, angle : %d\r\n", temp_deg, angle);
-		motor_turn(direction, angle);
+		angle_value = K_value*fabs((float)temp_deg - TEMP_MOYENNE);
+		printf("temperature : %.2f, angle : %d\r\n", temp_deg, angle_value);
+		motor_turn(direction, angle_value);
 
 		HAL_Delay(1000);
 

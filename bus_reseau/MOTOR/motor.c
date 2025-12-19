@@ -21,7 +21,7 @@ CAN_TxHeaderTypeDef txHeader = {
 		.ExtId = 0x00,
 		.IDE = CAN_ID_STD,
 		.RTR = CAN_RTR_DATA,
-		.DLC = 2,
+		.DLC = 3,
 		.TransmitGlobalTime = DISABLE
 };
 
