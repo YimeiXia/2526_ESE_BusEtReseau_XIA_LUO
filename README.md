@@ -122,3 +122,43 @@ xia@pi-xia:~/server $ curl -X POST "http://192.168.4.207:5000/api/request/?name=
      -d '{"city":"Paris"}'
 {"POST":{"data":{"city":"Paris"}},"args":{"age":"22","name":"Kelly"},"headers":{"Accept":"*/*","Content-Length":"16","Content-Type":"application/json","Host":"192.168.4.207:5000","User-Agent":"curl/8.14.1"},"method":"POST","path":null,"url":"http://192.168.4.207:5000/api/request/?name=Kelly&age=22"}
 ```
+
+## TP5 - Intégration I²C - Serial - REST - CAN
+
+```
+xia@pi-xia:~/server $ curl -X POST http://127.0.0.1:5000/api/temp/ -H "Content-Type: application/json"
+xia@pi-xia:~/server $ curl -X GET http://127.0.0.1:5000/api/temp/ -H "Content-Type: application/json"
+{"temperature":[25.75]}
+xia@pi-xia:~/server $ curl -X POST http://127.0.0.1:5000/api/temp/ -H "Content-Type: application/json"
+xia@pi-xia:~/server $ curl -X GET http://127.0.0.1:5000/api/temp/ -H "Content-Type: application/json"
+{"temperature":[25.75,25.82]}
+xia@pi-xia:~/server $ curl -X GET http://127.0.0.1:5000/api/temp/1 -H "Content-Type: application/json"
+{"index":1,"temperature":25.82}
+xia@pi-xia:~/server $ curl -X GET http://127.0.0.1:5000/api/temp/0 -H "Content-Type: application/json"
+{"index":0,"temperature":25.75}
+xia@pi-xia:~/server $ curl -X GET http://127.0.0.1:5000/api/angle/ -H "Content-Type: application/json"
+```
+
+```
+xia@pi-xia:~/server $ curl -X POST http://127.0.0.1:5000/api/press/ -H "Content-Type: application/json"
+xia@pi-xia:~/server $ curl -X POST http://127.0.0.1:5000/api/press/ -H "Content-Type: application/json"
+xia@pi-xia:~/server $ curl -X POST http://127.0.0.1:5000/api/press/ -H "Content-Type: application/json"
+xia@pi-xia:~/server $ curl -X GET http://127.0.0.1:5000/api/press/ -H "Content-Type: application/json"
+{"pression":[101643,101641,101641]}
+xia@pi-xia:~/server $ curl -X GET http://127.0.0.1:5000/api/press/1 -H "Content-Type: application/json"
+{"index":1,"pression":101641}
+xia@pi-xia:~/server $
+```
+
+```
+xia@pi-xia:~/server $ curl -X GET http://127.0.0.1:5000/api/scale/ -H "Content-Type: application/json"
+{"k":"K=12.34000"}
+xia@pi-xia:~/server $ curl -X POST http://127.0.0.1:5000/api/scale/2400 -H "Content-Type: application/json"
+{"new scale":2400}
+xia@pi-xia:~/server $
+```
+
+```
+xia@pi-xia:~/server $ curl -X GET http://127.0.0.1:5000/api/angle/ -H "Content-Type: application/json"
+{"angle":"A=6"}
+```
