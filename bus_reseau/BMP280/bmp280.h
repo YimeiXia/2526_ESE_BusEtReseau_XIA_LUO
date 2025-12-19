@@ -31,6 +31,7 @@ typedef struct
 	int16_t dig_P9;
 } bmp280_comp_param_t;
 
+
 void bmp_get_id(uint8_t *id);
 void bmp_configure();
 

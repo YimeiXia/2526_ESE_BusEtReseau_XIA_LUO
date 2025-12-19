@@ -61,6 +61,15 @@
 float K_value = 12.34;
 uint8_t angle_value = 0;
 
+bmp280_comp_param_t compensation_params;
+
+h_rpi_t h_rpi = {
+		.huart = &huart1,
+		.K_value = &K_value,
+		.angle_value = &angle_value,
+		.compensation_params = &compensation_params
+};
+
 /* USER CODE END PV */
 
 /* Private function prototypes -----------------------------------------------*/
@@ -77,7 +86,7 @@ void HAL_UART_RxCpltCallback(UART_HandleTypeDef *huart)
 	if (huart->Instance == USART1)
 	{
 //		HAL_GPIO_TogglePin(GPIOA, GPIO_PIN_5);
-		rpi_traitement_requete();
+		rpi_traitement_requete(&h_rpi);
 
 	}
 }
@@ -156,7 +165,7 @@ int main(void)
 	mpu_get_accel_data(&accel_data);
 	mpu_disp_accel_data(&accel_data);
 
-	rpi_init();
+	rpi_init(&h_rpi);
 
 	motor_init();
 
