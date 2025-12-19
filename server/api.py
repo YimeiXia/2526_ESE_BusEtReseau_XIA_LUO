@@ -118,6 +118,9 @@ def api_scale_index(index):
 
    global stm
 
+   if (index < 1000 or index > 9999):
+      return jsonify({"error" : "value of K have to be 4 digits !!!!"})
+
    if request.method == 'POST':
       stm.set_k(index)
       resp = {

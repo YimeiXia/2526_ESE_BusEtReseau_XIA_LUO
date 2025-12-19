@@ -13,8 +13,9 @@
 #include "usart.h"
 #include "bmp280.h"
 
-extern uint8_t rxData[6];
-extern char txData[10];
+uint8_t rxData[6];
+char txData[10];
+
 extern float K_value;
 extern uint8_t angle_value;
 
@@ -25,8 +26,6 @@ uint32_t raw_press;
 uint32_t comp_temp;
 uint32_t comp_press;
 
-int size = 0;
-
 
 void rpi_init()
 {
@@ -34,12 +33,15 @@ void rpi_init()
 	HAL_UART_Receive_IT(&huart1, rxData, 5);
 }
 
+/*
+ * A appeler dans la callback de reception UART
+ */
 void rpi_traitement_requete()
 {
 	memset(txData, 0, sizeof(txData));
 
+	int size = 0;
 
-//	HAL_UART_Receive(&huart1, rxData, 5, HAL_MAX_DELAY);
 	printf("Received: %c%c%c%c%c\r\n", rxData[0], rxData[1], rxData[2], rxData[3], rxData[4]);
 
 	if (rxData[0] == 'G' && rxData[1] == 'E' && rxData[2] == 'T' && rxData[3] == '_')

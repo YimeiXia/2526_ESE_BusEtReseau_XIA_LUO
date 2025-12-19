@@ -57,8 +57,7 @@
 
 /* USER CODE BEGIN PV */
 
-uint8_t rxData[6];
-char txData[10];
+
 float K_value = 12.34;
 uint8_t angle_value = 0;
 
